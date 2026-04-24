@@ -1,10 +1,10 @@
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import DashboardMockup from './DashboardMockup'
 
 export default function Hero() {
   return (
     <section className="relative pt-28 pb-16 px-6 overflow-hidden hero-gradient">
-      {/* Subtle grid */}
+      {/* Subtle dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -16,9 +16,12 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
+      {/* Staggered load — pure CSS, each child animates in sequence */}
+      <div className="relative z-10 max-w-5xl mx-auto text-center hero-animate">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-sky-200 bg-sky-50 text-sky-600 text-xs font-semibold mb-8 shadow-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+          <span className="relative flex h-2 w-2">
+            <span className="live-ring relative inline-flex rounded-full h-2 w-2 bg-sky-500" />
+          </span>
           Laundry performance intelligence
         </div>
 
@@ -35,16 +38,11 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href="#demo"
-            className="group flex items-center gap-2 btn-primary shadow-sm"
-          >
+          <a href="#demo" className="group flex items-center gap-2 btn-primary shadow-sm">
             Request a demo
             <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
           </a>
-          <a href="#solution" className="btn-secondary">
-            See how it works
-          </a>
+          <a href="#solution" className="btn-secondary">See how it works</a>
         </div>
 
         <div className="mt-8 flex items-center justify-center gap-5 text-sm text-slate-400">
@@ -56,8 +54,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Dashboard mockup */}
-      <div className="relative z-10 mt-14 w-full max-w-5xl mx-auto">
+      {/* Dashboard — separate animation with longer delay */}
+      <div className="relative z-10 mt-14 w-full max-w-5xl mx-auto hero-mockup">
         <DashboardMockup />
       </div>
     </section>

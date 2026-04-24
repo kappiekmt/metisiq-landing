@@ -18,53 +18,163 @@
   }
 }
 
-@layer utilities {
-  .gradient-text {
-    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+/* ─── Keyframes ─── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroScale {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-7px); }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes barGrow {
+  from { width: 0; }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ─── Hero load animations (pure CSS, no JS needed) ─── */
+.hero-animate > * {
+  opacity: 0;
+  animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-animate > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-animate > *:nth-child(2) { animation-delay: 0.18s; }
+.hero-animate > *:nth-child(3) { animation-delay: 0.30s; }
+.hero-animate > *:nth-child(4) { animation-delay: 0.42s; }
+.hero-animate > *:nth-child(5) { animation-delay: 0.52s; }
+
+.hero-mockup {
+  opacity: 0;
+  animation: heroScale 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.62s forwards;
+}
+
+/* ─── Gradient shimmer on headline ─── */
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #0ea5e9 0%,
+    #6366f1 30%,
+    #a78bfa 50%,
+    #6366f1 70%,
+    #0ea5e9 100%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ─── Dashboard float ─── */
+.dashboard-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ─── SVG chart line draw ─── */
+.chart-line {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+}
+.chart-line.in-view {
+  animation: drawLine 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+/* ─── Energy bars grow ─── */
+.energy-bar {
+  width: 0;
+}
+.energy-bar.in-view {
+  animation: barGrow 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.energy-bar.in-view:nth-child(1) { animation-delay: 0.4s; width: 52%; }
+.energy-bar.in-view:nth-child(2) { animation-delay: 0.55s; width: 31%; }
+.energy-bar.in-view:nth-child(3) { animation-delay: 0.7s; width: 17%; }
+
+/* ─── Live pulse ring ─── */
+.live-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: pulseRing 1.8s ease-out infinite;
+  opacity: 0.4;
+}
+
+/* ─── Section / page utilities ─── */
+.hero-gradient {
+  background: radial-gradient(ellipse 100% 60% at 50% -10%, #eff6ff 0%, #ffffff 70%);
+}
+.section-alt {
+  background-color: #f8fafc;
+}
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  border-color: #cbd5e1;
+}
+.btn-primary {
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+.btn-primary:hover { background: #1e293b; }
+.btn-secondary {
+  background: transparent;
+  color: #475569;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.btn-secondary:hover { border-color: #cbd5e1; color: #0f172a; }
+
+/* ─── Respect reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate > *,
+  .hero-mockup,
+  .gradient-text,
+  .dashboard-float,
+  .chart-line.in-view,
+  .energy-bar.in-view,
+  .live-ring::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    background-position: 0 center !important;
+    width: var(--bar-w, auto) !important;
+    stroke-dashoffset: 0 !important;
   }
-  .hero-gradient {
-    background: radial-gradient(ellipse 100% 60% at 50% -10%, #eff6ff 0%, #ffffff 70%);
-  }
-  .section-alt {
-    background-color: #f8fafc;
-  }
-  .card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .card:hover {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
-    border-color: #cbd5e1;
-  }
-  .btn-primary {
-    background: #0f172a;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.625rem 1.25rem;
-    border-radius: 10px;
-    transition: background 0.15s ease, transform 0.1s ease;
-  }
-  .btn-primary:hover {
-    background: #1e293b;
-  }
-  .btn-secondary {
-    background: transparent;
-    color: #475569;
-    font-weight: 500;
-    font-size: 0.875rem;
-    padding: 0.625rem 1.25rem;
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-  .btn-secondary:hover {
-    border-color: #cbd5e1;
-    color: #0f172a;
+  * {
+    transition-duration: 0.01ms !important;
   }
 }

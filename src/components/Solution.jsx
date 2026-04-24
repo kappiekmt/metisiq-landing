@@ -1,4 +1,6 @@
 import { CheckCircle2 } from 'lucide-react'
+import AnimateIn from './AnimateIn'
+import CountUp from './CountUp'
 
 const pillars = [
   'Real-time dashboards for every layer of your organisation',
@@ -8,13 +10,19 @@ const pillars = [
   'Industry-specific KPIs built in from day one',
 ]
 
+const kpis = [
+  { label: 'Live data', value: '1', suffix: 's', sub: 'refresh rate' },
+  { label: 'Data sources', value: '15', suffix: '+', sub: 'connected' },
+  { label: 'Uptime SLA', value: '99.9', suffix: '%', sub: 'guaranteed' },
+  { label: 'Time to value', value: '5', suffix: ' days', sub: 'to first insight' },
+]
+
 export default function Solution() {
   return (
     <section id="solution" className="py-24 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* Text side */}
-          <div>
+          <AnimateIn from="left">
             <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Our solution</p>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
               One platform.
@@ -35,29 +43,27 @@ export default function Solution() {
                 </li>
               ))}
             </ul>
-          </div>
+          </AnimateIn>
 
-          {/* KPI tiles */}
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { label: 'Live data', value: '< 1s', sub: 'refresh rate' },
-              { label: 'Data sources', value: '15+', sub: 'connected' },
-              { label: 'Uptime SLA', value: '99.9%', sub: 'guaranteed' },
-              { label: 'Time to value', value: '< 5 days', sub: 'to first insight' },
-            ].map((kpi) => (
-              <div key={kpi.label} className="card p-5 text-center">
-                <p className="text-2xl font-bold text-slate-900 mb-1">{kpi.value}</p>
-                <p className="text-xs font-semibold text-sky-600">{kpi.label}</p>
-                <p className="text-xs text-slate-400 mt-0.5">{kpi.sub}</p>
+          <AnimateIn delay={120}>
+            <div className="grid grid-cols-2 gap-3">
+              {kpis.map((kpi, i) => (
+                <div key={kpi.label} className="card p-5 text-center">
+                  <p className="text-2xl font-bold text-slate-900 mb-1">
+                    <CountUp value={kpi.value} suffix={kpi.suffix} />
+                  </p>
+                  <p className="text-xs font-semibold text-sky-600">{kpi.label}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">{kpi.sub}</p>
+                </div>
+              ))}
+              <div className="col-span-2 p-5 rounded-2xl border border-sky-100 bg-sky-50 text-center">
+                <p className="text-sm text-sky-700 italic font-medium">
+                  "From energy and water… to production performance and operational inputs.
+                  Everything is connected."
+                </p>
               </div>
-            ))}
-            <div className="col-span-2 p-5 rounded-2xl border border-sky-100 bg-sky-50 text-center">
-              <p className="text-sm text-sky-700 italic font-medium">
-                "From energy and water… to production performance and operational inputs.
-                Everything is connected."
-              </p>
             </div>
-          </div>
+          </AnimateIn>
         </div>
       </div>
     </section>
