@@ -1,4 +1,5 @@
 import './index.css'
+import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Logos from './components/Logos'
@@ -14,19 +15,21 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <Navbar />
-      <Hero />
-      <Logos />
-      <Problem />
-      <Solution />
-      <Metrics />
-      <Features />
-      <Benefits />
-      <UseCases />
-      <Roadmap />
-      <Demo />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+        <Navbar />
+        <Hero />
+        <Logos />
+        <Problem />
+        <Solution />
+        <Metrics />
+        <Features />
+        <Benefits />
+        <UseCases />
+        <Roadmap />
+        <Demo />
+        <Footer />
+      </div>
+    </ThemeProvider>
   )
 }

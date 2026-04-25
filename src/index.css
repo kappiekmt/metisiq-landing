@@ -1,16 +1,23 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color-scheme: light dark;
   }
   body {
     margin: 0;
     background-color: #ffffff;
     color: #0f172a;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .dark body {
+    background-color: #0f172a;
+    color: #f1f5f9;
   }
   #root {
     width: 100%;
@@ -157,6 +164,48 @@
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 .btn-secondary:hover { border-color: #cbd5e1; color: #0f172a; }
+
+/* ─── Hero dot grid (replaces inline style for dark mode support) ─── */
+.hero-grid {
+  background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(to right, #e2e8f0 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 60%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 60%, transparent);
+}
+.dark .hero-grid {
+  background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(to right, #1e293b 1px, transparent 1px);
+}
+
+/* ─── Dark mode overrides for shared utilities ─── */
+.dark .hero-gradient {
+  background: radial-gradient(ellipse 100% 60% at 50% -10%, #0c1f3a 0%, #0f172a 70%);
+}
+.dark .section-alt {
+  background-color: #020617;
+}
+.dark .card {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  border-color: #475569;
+}
+.dark .btn-primary {
+  background: #0ea5e9;
+  color: #0f172a;
+}
+.dark .btn-primary:hover {
+  background: #38bdf8;
+}
+.dark .btn-secondary {
+  color: #94a3b8;
+  border-color: #334155;
+}
+.dark .btn-secondary:hover {
+  border-color: #475569;
+  color: #f1f5f9;
+}
 
 /* ─── Respect reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {

@@ -24,14 +24,14 @@ export default function Demo() {
   }
 
   return (
-    <section id="demo" className="py-24 px-6 bg-white">
+    <section id="demo" className="py-24 px-6 bg-white dark:bg-slate-900">
       <div className="max-w-3xl mx-auto">
         <AnimateIn className="text-center mb-10">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Get started</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
+          <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Get started</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-5 tracking-tight">
             See MetisIQ in action
           </h2>
-          <p className="text-slate-500 text-lg max-w-md mx-auto leading-relaxed">
+          <p className="text-slate-500 dark:text-slate-400 text-lg max-w-md mx-auto leading-relaxed">
             Request a personalised demo. We'll walk you through the platform
             using data from a laundry similar to yours.
           </p>
@@ -39,25 +39,25 @@ export default function Demo() {
 
         {status === 'success' ? (
           <AnimateIn from="scale">
-            <div className="p-10 rounded-2xl border border-emerald-200 bg-emerald-50 text-center">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 size={24} className="text-emerald-600" />
+            <div className="p-10 rounded-2xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 text-center">
+              <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 size={24} className="text-emerald-600 dark:text-emerald-400" />
               </div>
-              <h3 className="text-slate-900 font-semibold text-xl mb-2">Request received!</h3>
-              <p className="text-slate-500 text-sm">We'll be in touch within one business day to schedule your demo.</p>
+              <h3 className="text-slate-900 dark:text-white font-semibold text-xl mb-2">Request received!</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm">We'll be in touch within one business day to schedule your demo.</p>
             </div>
           </AnimateIn>
         ) : (
           <AnimateIn delay={100}>
-            <form onSubmit={handleSubmit} className="card p-8 shadow-lg shadow-slate-100">
+            <form onSubmit={handleSubmit} className="card p-8 shadow-lg shadow-slate-100 dark:shadow-slate-900/50">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 {[
-                  { name: 'name',    label: 'Full name',   type: 'text',  required: true,  placeholder: 'Jan de Vries' },
-                  { name: 'email',   label: 'Work email',  type: 'email', required: true,  placeholder: 'jan@wasserij.nl' },
-                  { name: 'company', label: 'Company',     type: 'text',  required: true,  placeholder: 'Wasserij BV' },
+                  { name: 'name',    label: 'Full name',  type: 'text',  required: true, placeholder: 'Jan de Vries' },
+                  { name: 'email',   label: 'Work email', type: 'email', required: true, placeholder: 'jan@wasserij.nl' },
+                  { name: 'company', label: 'Company',    type: 'text',  required: true, placeholder: 'Wasserij BV' },
                 ].map((field) => (
-                  <div key={field.name} className={field.name === 'company' ? '' : ''}>
-                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                  <div key={field.name}>
+                    <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
                       {field.label} {field.required && '*'}
                     </label>
                     <input
@@ -67,17 +67,17 @@ export default function Demo() {
                       value={form[field.name]}
                       onChange={handleChange}
                       placeholder={field.placeholder}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm placeholder-slate-300 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-50 transition-all"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-sm placeholder-slate-300 dark:placeholder-slate-600 focus:outline-none focus:border-sky-400 dark:focus:border-sky-500 focus:ring-2 focus:ring-sky-50 dark:focus:ring-sky-900/20 transition-all"
                     />
                   </div>
                 ))}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">Your role</label>
+                  <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Your role</label>
                   <select
                     name="role"
                     value={form.role}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-50 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:border-sky-400 dark:focus:border-sky-500 focus:ring-2 focus:ring-sky-50 dark:focus:ring-sky-900/20 transition-all"
                   >
                     <option value="">Select role…</option>
                     <option>CEO / Director</option>
@@ -90,9 +90,9 @@ export default function Demo() {
               </div>
 
               <div className="mb-5">
-                <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
                   What's your biggest challenge?{' '}
-                  <span className="text-slate-400 font-normal">(optional)</span>
+                  <span className="text-slate-400 dark:text-slate-500 font-normal">(optional)</span>
                 </label>
                 <textarea
                   name="message"
@@ -100,11 +100,11 @@ export default function Demo() {
                   onChange={handleChange}
                   rows={3}
                   placeholder="e.g. energy costs, no real-time insight, CO₂ reporting…"
-                  className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm placeholder-slate-300 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-50 transition-all resize-none"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-sm placeholder-slate-300 dark:placeholder-slate-600 focus:outline-none focus:border-sky-400 dark:focus:border-sky-500 focus:ring-2 focus:ring-sky-50 dark:focus:ring-sky-900/20 transition-all resize-none"
                 />
               </div>
 
-              {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+              {error && <p className="text-red-500 dark:text-red-400 text-sm mb-4">{error}</p>}
 
               <button
                 type="submit"
@@ -121,7 +121,7 @@ export default function Demo() {
                 )}
               </button>
 
-              <p className="text-center text-xs text-slate-400 mt-4">
+              <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-4">
                 No commitment. We typically respond within one business day.
               </p>
             </form>
