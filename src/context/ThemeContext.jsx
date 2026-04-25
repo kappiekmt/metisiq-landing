@@ -4,9 +4,7 @@ const ThemeContext = createContext()
 
 export function ThemeProvider({ children }) {
   const [dark, setDark] = useState(() => {
-    const stored = localStorage.getItem('metisiq-theme')
-    if (stored) return stored === 'dark'
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
+    return localStorage.getItem('metisiq-theme') === 'dark'
   })
 
   useEffect(() => {
